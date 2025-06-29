@@ -77,6 +77,8 @@ export function parseCoords(input) {
     .map(line => line.trim())
     .filter(line => line)
     .map(line => {
+      // Remove surrounding brackets if present
+      line = line.replace(/^\[|\]$/g, '').replace(/^\(|\)$/g, '');
       const parts = line.split(',').map(p => parseFloat(p.trim()));
       if (parts.length !== 2 || parts.some(isNaN)) {
         throw new Error(`Invalid coordinate format: '${line}'`);
